@@ -5,7 +5,11 @@ interface StudentProps {}
 const Student: FC<StudentProps> = () => {
     return (
         <>
-            <div>Student</div>
+            <div>Student asdfasdfasdfasd
+                asdfasdfasdfasd
+
+                asdfadsfasd
+            </div>
         </>
     );
 }
