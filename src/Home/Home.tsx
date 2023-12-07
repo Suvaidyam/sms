@@ -14,13 +14,16 @@ const Home: FC<HomeProps> = () => {
             <div className='w-full '>
 
                 <Navbar/>
+                <div>
+                    
+                </div>
                 <Sidebar/>
 
 
         
-                <div className='w-full overflow-y-auto'>
+                <div className='w-full overflow-hidden'>
 
-                    <div className='mt-[9vh]'>
+                    <div className='mt-[9vh] pl-56 overflow-y-auto'>
                          <Outlet/>
  
                     </div>
