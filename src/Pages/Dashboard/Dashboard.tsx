@@ -5,7 +5,7 @@ interface DashboardProps {}
 const Dashboard: FC<DashboardProps> = () => {
     return (
         <>
-            <div className='mt-[9vh] bg-red-600 h-96'>Dashboard</div>
+            <div className='mt-[50px] bg-red-600 h-96'>Dashboard</div>
         </>
     );
 }
