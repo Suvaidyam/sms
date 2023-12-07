@@ -3,6 +3,9 @@ import { Routes, Route } from 'react-router-dom';
 import Login from '../Auth/Login/Login';
 
 
+
+
+
 interface RouterProps { }
 
 const Router: FC<RouterProps> = () => {
@@ -10,7 +13,14 @@ const Router: FC<RouterProps> = () => {
         <>
             <Routes>
                 <Route path='/' element={<Login />} />
-                {/* <Route path='*' element={<NotFound />} /> */}
+
+                       
+
+                   
+                    
+
+                </Route>
+
               
             </Routes>
         </>
