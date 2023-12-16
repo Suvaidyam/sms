@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.sidebar-open {
+    transition:  0.3s ease;
+  }
+  
+.sidebar-closed {
+    transition:  0.3s ease;
+  }
+  
+.translate-x-minus-64 {
+    transform: translateX(-64px);
+  }

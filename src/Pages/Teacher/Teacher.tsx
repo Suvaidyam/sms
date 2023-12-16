@@ -11,3 +11,4 @@ const Teacher: FC<TeacherProps> = () => {
 }
 
 export default Teacher;
+ 
