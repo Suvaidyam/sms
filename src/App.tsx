@@ -1,4 +1,5 @@
 import type { FC } from 'react';
+import './App.css';
 // import { Router } from 'react-router-dom';
 import Router from './Router/Router'
 

@@ -7,9 +7,10 @@ import Student from '../Pages/Student/Student';
 import Teacher from '../Pages/Teacher/Teacher';
 import Register from '../Auth/Register/Register';
 import SchoolRegister from '../Pages/SchoolRegister/SchoolRegister';
-import YourSchools from '../Pages/YourSchools/yourschools';
 import RegisterPage from '../Pages/RegisterPage/RegisterPage';
 import Protected from './Protected';
+import SchoolPage from '../Pages/YourSchools/SchoolPage'
+import Myschools from '../Pages/YourSchools/Myschools/Myschools';
 // import Profile from '../Pages/Profile/Profile';
 
 
@@ -18,6 +19,7 @@ interface RouterProps { }
 const Router: FC<RouterProps> = () => {
     return (
         <>
+            
             <Routes>
                 <Route path='/' element={<Login />} />
 
@@ -31,9 +33,11 @@ const Router: FC<RouterProps> = () => {
                     <Route path='registerpage' element={<RegisterPage />}>
                         <Route path='register' element={<Register />} />
                     </Route>
-
+                    
                     <Route path='schoolregister' element={<SchoolRegister />} />
-                    <Route path='yourschools' element={<YourSchools />} />
+                    <Route path='schoolpage' element={<SchoolPage />} >
+                        <Route path='myschool' element={<Myschools />} />
+                    </Route>
                 </Route>
             </Routes>
         </>

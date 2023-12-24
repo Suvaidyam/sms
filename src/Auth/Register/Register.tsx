@@ -9,8 +9,8 @@ interface RegisterProps { }
 const Register: FC<RegisterProps> = () => {
   const {roleType, SchoolName, setSchoolName } = useDataContext()
   useEffect(() => {
-    const fechData = async () => {
-      try {
+    const fechData = async () => { 
+      try { 
         let res: any = await Http({
           url: '/school/getallschool',
           method: 'get',
@@ -69,7 +69,7 @@ const Register: FC<RegisterProps> = () => {
   }
   return (
     <>
-      <section className="bg-gray-50 dark:bg-gray-900">
+      <section className="  mt-5 md:mt-0">
         <div className="flex flex-col items-center justify-center  mx-auto md:h-screen lg:py-0">
           <Formik
             initialValues={{
@@ -173,14 +173,11 @@ const Register: FC<RegisterProps> = () => {
                   >
                     <option value="" disabled>Select School</option>
                     {SchoolName?.map((schoolname, index) => (
-                      <option key={index} value={schoolname.schoolname} className='px-2 py-1'>
+                      <option key={index} value={schoolname._id} className='px-2 py-1'>
                         {schoolname.schoolname}
                       </option>
                     ))}
                   </Field>
-
-
-
                   <label
                     htmlFor="school"
                     className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"

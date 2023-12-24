@@ -1,37 +1,43 @@
-import React, { FC, useState ,useEffect } from 'react';
+import React, { FC, useState, useEffect } from 'react';
 import { MdMenu } from "react-icons/md";
 import { CgProfile } from "react-icons/cg";
-import { Link ,useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Http from '../Services/Http';
+import { useDataContext } from '../Context/DataContext';
+import { CiLogout } from "react-icons/ci";
 
-interface NavbarProps {}
+interface NavbarProps { }
+
 
 const Navbar: FC<NavbarProps> = () => {
-  const [hideUnhide, sethideUnhide] = useState<boolean>(true);
-  const [userData, setuserData] = useState<any | null>(null);
- 
+  
+  const { userData, setuserData, massegeLogout, setmassegeLogout, setisMobileSidebarOpen ,hideUnhide, sethideUnhide} = useDataContext()
 
   const navigate = useNavigate()
-  
-  
-  const profileHandler = ()=>{
-    sethideUnhide((rev)=>!rev)
+
+
+  const profileHandler = () => {
+    sethideUnhide((rev) => !rev)
     const storedUserString = sessionStorage.getItem("user");
     const storedUser = storedUserString ? JSON.parse(storedUserString) : null;
     setuserData(storedUser)
   };
-  
-  
-  const handleSignOut = ()=>{
-    sessionStorage.clear()
+
+  const schoolName = userData?.school?.schoolname;
+
+  const handleSignOut = () => {
+    sessionStorage.clear() 
     navigate('/')
-    
+    setmassegeLogout(true)
+    setTimeout(() => {
+      setmassegeLogout(false)
+    }, 5000);
     const Logout = async () => {
       try {
         let res = await Http({
           url: "/auth/logoutuser",
           method: 'post',
-          data: { id:userData?.id }
+          data: { id: userData?.id }
         });
       } catch (error) {
         console.log(error);
@@ -39,82 +45,92 @@ const Navbar: FC<NavbarProps> = () => {
     };
     Logout();
   }
-  
-  
-    return (
-        <> 
+  const MobiletoggleSidebarHandler = () => {
+    setisMobileSidebarOpen((prev) => !prev);
+  }
 
-        <nav className="fixed top-0 z-50 w-full h-[9vh] bg-[#fa4454]  ">
-          <div className="px-3 py-3 lg:px-5 lg:pl-3 relative">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center justify-start rtl:justify-end">
-                <button
-                  
-                  type="button"
-                  className="md:hidden text-white"
-                >
-                  <MdMenu size={30}/>
+  return (
+    <>
 
-                </button>
-                <div  className="flex ms-2 md:me-24">
-                  
-                  <span className="self-center text-2xl font-bold sm:text-2xl whitespace-nowrap text-white">
-                   Suvaiydam
-                  </span>
-                </div>
-              </div>
-              <div className="flex items-center">
-                <div className="flex items-center ms-3 ">
-                  <div className=' '>
-                    <button
-                      onClick={profileHandler}
-                      type="button"
-                      className="flex text-sm mr-10 rounded-full focus:ring-4 "
-                    >
-                     <div className='text-white  ' >
-                        <CgProfile size={30}/>
-                     </div>
-                      
-                    </button>
-                     
-                  </div>
-                  
-                </div>
+      <nav className="fixed top-0 z-50 w-full h-[9vh] bg-[#ffffff] border-b shadowB">
+        <div className="px-4 py-3 lg:px-5 lg:pl-3 relative">
+          <div className="flex items-center justify-between">
+            <div className="flex w-2/4 items-center justify-start rtl:justify-end">
+              <button
+                onClick={MobiletoggleSidebarHandler}
+                type="button"
+                className="md:hidden text-base font-semibold text-blue-700"
+              >
+                <MdMenu size={30} />
+
+              </button>
+              <div className="flex ms-2 md:me-24 pl-6">
+
+                <span className="self-center text-gray-900 uppercase sm:text-2xl whitespace-nowrap text-base font-semibold">
+                  Suvaiydam
+                </span>
               </div>
             </div>
-            <div className={`container w-[250px] ${!hideUnhide ? '' : 'hidden'}  bg-white p-4 shadow-md rounded-md left-[80%]  top-12  mx-auto  absolute`} >
-                          <div className="w-full ">
-                            <h2 className="text-2xl font-semibold mb-4">User Profile</h2>
-                            <div className="flex mb-4">
-                              <label htmlFor="name" className="block text-sm font-medium text-gray-900">Name: </label>
-                              <p id="name" className=" text-sm  text-gray-900 ml-2 ">{userData?.username}</p>
-                            </div>
-                            <div className="flex mb-4">
-                              <label htmlFor="email" className="block text-sm font-medium text-gray-900">Email: </label>
-                              <p id="email" className=" text-sm text-gray-900 ml-2">{userData?.email}</p>
-                            </div>
-                            <div className="flex mb-4">
-                              <label htmlFor="mobile" className="block text-sm font-medium text-gray-900">Mobile: </label>
-                              <p id="mobile" className=" text-sm text-gray-900 ml-2">{userData?.mobile}</p>
-                            </div>
-                            <div className="flex mb-4">
-                              <label htmlFor="school" className="block text-sm font-medium text-gray-900">Mobile: </label>
-                              <p id="school" className=" text-sm text-gray-900 ml-2">{userData?.school}</p>
-                            </div>
-                            <div className="flex mb-4">
-                              <label htmlFor="role" className="block text-sm font-medium text-gray-900">Role: </label>
-                              <p id="role" className=" text-sm text-gray-900 ml-2">{userData?.role}</p>
-                            </div>
-                            <button onClick={handleSignOut} className="bg-blue-500 text-white px-2 py-1 rounded-md">Sign Out</button>
-                          </div>
+            <div className="flex w-2/4 justify-end ">
+              <div className="flex   ">
+                <div className=' '>
+                  <button
+                    onClick={profileHandler}
+                    type="button"
+                    className="flex text-sm font-semibold mr-2 md:mr-10 rounded-full  "
+                  >
+                    <div className='text-base font-semibold  text-blue-700' >
+                      <CgProfile size={30} />
+                    </div>
+
+                  </button>
+
+                </div>
+
               </div>
+            </div>
           </div>
-        </nav>
-            
-        
-            
-        </>
-    ); 
+          <div className={`container w-[250px] ${!hideUnhide ? '' : 'hidden'}  bg-white p-4 shadow-md rounded-b-md right-0 top-16 md:top-14 border  mx-auto  absolute`} >
+            <div className="w-full ">
+              <h2 className="text-2xl font-semibold mb-4">User Profile</h2>
+              <div className="flex mb-4">
+                <label htmlFor="name" className="block text-base font-semibold  text-gray-900">Name: </label>
+                <p id="name" className=" text-sm font-semibold  text-gray-900 ml-2 ">{userData?.username}</p>
+              </div>
+              <div className="flex mb-4">
+                <label htmlFor="email" className="block text-base font-semibold  text-gray-900">Email: </label>
+                <p id="email" className=" text-sm font-semibold text-gray-900 ml-2">{userData?.email}</p>
+              </div>
+              <div className="flex mb-4">
+                <label htmlFor="mobile" className="block text-base font-semibold  text-gray-900">Mobile: </label>
+                <p id="mobile" className=" text-sm font-semibold text-gray-900 ml-2">{userData?.mobile}</p>
+              </div>
+              {
+                userData?.role !=='director' &&<>
+                
+              <div className="flex mb-4">
+                <label htmlFor="school" className="block text-base font-semibold  text-gray-900">School: </label>
+                <p id="school" className=" text-sm font-semibold text-gray-900 ml-2">{schoolName}</p>
+              </div>
+                </>
+              }
+              <div className="flex mb-4">
+                <label htmlFor="role" className="block text-base font-semibold  text-gray-900">Role: </label>
+                <p id="role" className=" text-sm font-semibold text-gray-900 ml-2">{userData?.role}</p>
+              </div>
+              <button onClick={handleSignOut} className="flex w-full text-base font-semibold text-black border-t pt-4 hover:text-blue-700">
+                <CiLogout size={20} />
+                <span className='ml-4 pb-1'> Sign Out</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+
+
+    </>
+  );
 }
 
 export default Navbar;
