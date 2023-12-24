@@ -3,6 +3,8 @@ import React from 'react';
 import { FaChalkboardTeacher } from 'react-icons/fa';
 
 const TeacherCard: React.FC = () => {
+    const NumberTeachers = sessionStorage.getItem('totalTeachers');
+                console.log(NumberTeachers);
     return (
         <div className="card bg-white border border-gray-300 p-4 rounded-md shadow-md">
             <div className='flex items-center space-x-4'>
@@ -10,7 +12,7 @@ const TeacherCard: React.FC = () => {
                 <h2 className="text-xl font-bold">Teacher</h2>
             </div>
             <div className="mt-2">
-                <p className="text-gray-700">Total: 10101</p>
+                <p className="text-gray-700">Total: {NumberTeachers}</p>
             </div>
         </div>
     );

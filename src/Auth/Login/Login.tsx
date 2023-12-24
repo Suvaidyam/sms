@@ -66,7 +66,7 @@ const Login: FC<LoginProps> = () => {
         <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
           <a
             href="#"
-            className="flex mb-2 items-center text-3xl font-bold leading-tight tracking-tight text-[#ed2553] uppercase"
+            className="flex mb-2 items-center text-3xl font-bold leading-tight tracking-tight text-blue-700 uppercase"
           >
             {/* <img
               className="w-8 h-8 mr-2"
@@ -75,9 +75,9 @@ const Login: FC<LoginProps> = () => {
             /> */}
             Suvaidyam
           </a>
-          <div className="w-[380px] bg-white rounded-lg  shadow-md dark:border md:mt-0 sm:max-w-md xl:p-0 ">
+          <div className="w-[360px] bg-white rounded-lg  shadow-md dark:border md:mt-0 sm:max-w-md xl:p-0 ">
             <div className="p-6 space-y-4 md:space-y-6 sm:p-8 ">
-              <h1 className="text-3xl font-bold leading-tight  tracking-tight text-[#ed2553] uppercase">
+              <h1 className="text-3xl font-bold leading-tight  tracking-tight text-blue-700 uppercase">
                 Login
               </h1>
               <Formik
@@ -100,7 +100,7 @@ const Login: FC<LoginProps> = () => {
                       type="email"
                       name="email"
                       id="email"
-                      className=" border-b focus:border-b-2 focus:border-[#ed2553] outline-none py-4 text-base font-medium border-gray-900 text-gray-900  placeholder:font-extralight placeholder:text-base  block w-full  "
+                      className=" border-b focus:border-b-2 focus:border-blue-700 outline-none py-1 text-base font-medium border-gray-900 text-gray-900  placeholder:font-extralight placeholder:text-base  block w-full  "
                       placeholder="Name@Email.com"
 
                     />
@@ -120,7 +120,7 @@ const Login: FC<LoginProps> = () => {
                       name="password"
                       id="password"
                       placeholder="••••••••"
-                      className="border-b focus:border-b-2 focus:border-[#ed2553] outline-none py-4 text-base font-medium border-gray-900 text-gray-900  placeholder:font-extralight  block w-full  "
+                      className="border-b focus:border-b-2 focus:border-blue-700 outline-none py-1 text-base font-medium border-gray-900 text-gray-900  placeholder:font-extralight  block w-full  "
 
                     />
                     <p className='h-10 font-extralight text-sm text-[#ed2553]  py-2'>
@@ -130,7 +130,7 @@ const Login: FC<LoginProps> = () => {
                   <div className="flex items-center justify-between pt-2">
                     <button
                     type="submit"
-                    className="text-white bg-[#ed2553]  leading-tight tracking-tight  uppercase mx-auto focus:ring-4 focus:outline-none  font-medium rounded-lg text-md w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                    className="text-white bg-blue-700  leading-tight tracking-tight  uppercase mx-auto focus:ring-4 focus:outline-none  font-medium rounded-lg text-md w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                   >
                     Login
                   </button>

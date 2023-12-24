@@ -50,7 +50,7 @@ const Student: FC<StudentProps> = () => {
                             <td className="py-2 px-4">{student.email}</td>
                             <td className="py-2 px-4">{student.role}</td>
                             <td className="py-2 px-4">{student.mobile}</td>
-                            <td className="py-2 px-4">{student.school}</td>
+                            <td className="py-2 px-4">{student.school.schoolname}</td>
                         </tr>
                     ))}
                 </tbody>
