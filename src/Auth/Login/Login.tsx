@@ -10,7 +10,7 @@ import Logout from '../../Pages/Massage/Logout';
 
 interface LoginProps { }
 
-const Login: FC<LoginProps> = () => {
+const Login: FC<LoginProps> = () => { 
 
   const navigate = useNavigate()
   const { setloginMassage ,massegeLogout} = useDataContext()
@@ -37,7 +37,7 @@ const Login: FC<LoginProps> = () => {
           sessionStorage.setItem("token", res.data.token);
           const userString = JSON.stringify(res.data.user);
           sessionStorage.setItem("user", userString)
-          navigate('/home');
+          navigate('/home/dashboard');
           setloginMassage(res.data.token)
           setTimeout(()=>{
             setloginMassage(null)
@@ -64,8 +64,8 @@ const Login: FC<LoginProps> = () => {
     <>
       <section className="bg-gray-200 dark:bg-gray-900 relative">
         <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-          <a
-            href="#"
+          <div
+            // href="#"
             className="flex mb-2 items-center text-3xl font-bold leading-tight tracking-tight text-blue-700 uppercase"
           >
             {/* <img
@@ -74,7 +74,7 @@ const Login: FC<LoginProps> = () => {
               alt="logo"
             /> */}
             Suvaidyam
-          </a>
+          </div>
           <div className="w-[360px] bg-white rounded-lg  shadow-md dark:border md:mt-0 sm:max-w-md xl:p-0 ">
             <div className="p-6 space-y-4 md:space-y-6 sm:p-8 ">
               <h1 className="text-3xl font-bold leading-tight  tracking-tight text-blue-700 uppercase">
@@ -137,12 +137,12 @@ const Login: FC<LoginProps> = () => {
                   </div>
                   <div className='flex justify-end'>
 
-                    <a
-                      href="#"
+                    <div
+                      // href="#"
                       className="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500"
                     >
                       Forgot password?
-                    </a>
+                    </div>
                   </div>
 
                 </Form>

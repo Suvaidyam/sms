@@ -6,9 +6,6 @@ const Successful: FC<SuccessfulProps> = () => {
     return (
         <>
             <>
-                {/* component */}
-                {/* <div className="w-full h-screen flex flex-col items-center justify-center"> */}
-                   
                     <div className="mb-4 absolute z-50 top-0 left-[40%] ">
                         <div className="flex max-w-sm w-[250px] bg-white shadow-md rounded-lg overflow-hidden mx-auto">
                             <div className="w-2 bg-green-600"></div>
@@ -27,12 +24,7 @@ const Successful: FC<SuccessfulProps> = () => {
                                         viewBox="0 0 24 24"
                                         stroke="currentColor"
                                     >
-                                        {/* <path
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                            strokeWidth={2}
-                                            d="M6 18L18 6M6 6l12 12"
-                                        /> */}
+                                
                                     </svg>
                                 </a>
                             </div>
@@ -40,7 +32,6 @@ const Successful: FC<SuccessfulProps> = () => {
                     </div>
                    
                   
-                {/* </div> */}
             </>
 
         </>

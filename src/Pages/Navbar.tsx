@@ -1,7 +1,7 @@
 import React, { FC, useState, useEffect } from 'react';
 import { MdMenu } from "react-icons/md";
 import { CgProfile } from "react-icons/cg";
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Http from '../Services/Http';
 import { useDataContext } from '../Context/DataContext';
 import { CiLogout } from "react-icons/ci";
@@ -10,10 +10,11 @@ interface NavbarProps { }
 
 
 const Navbar: FC<NavbarProps> = () => {
-  
-  const { userData, setuserData, massegeLogout, setmassegeLogout, setisMobileSidebarOpen ,hideUnhide, sethideUnhide} = useDataContext()
+
+  const { userData, setuserData, setmassegeLogout, setisMobileSidebarOpen, hideUnhide, sethideUnhide } = useDataContext()
 
   const navigate = useNavigate()
+
 
 
   const profileHandler = () => {
@@ -24,9 +25,11 @@ const Navbar: FC<NavbarProps> = () => {
   };
 
   const schoolName = userData?.school?.schoolname;
+  const userClass: any = userData
+  const classs = userClass?.userClass
 
   const handleSignOut = () => {
-    sessionStorage.clear() 
+    sessionStorage.clear()
     navigate('/')
     setmassegeLogout(true)
     setTimeout(() => {
@@ -39,6 +42,8 @@ const Navbar: FC<NavbarProps> = () => {
           method: 'post',
           data: { id: userData?.id }
         });
+        console.log(res.data);
+        
       } catch (error) {
         console.log(error);
       }
@@ -64,10 +69,10 @@ const Navbar: FC<NavbarProps> = () => {
                 <MdMenu size={30} />
 
               </button>
-              <div className="flex ms-2 md:me-24 pl-6">
+              <div className="flex  ">
 
-                <span className="self-center text-gray-900 uppercase sm:text-2xl whitespace-nowrap text-base font-semibold">
-                  Suvaiydam
+                <span className="self-center absolute  text-gray-900 uppercase sm:text-2xl whitespace-nowrap text-base font-semibold">
+                  SCHOOL SMS
                 </span>
               </div>
             </div>
@@ -90,7 +95,7 @@ const Navbar: FC<NavbarProps> = () => {
               </div>
             </div>
           </div>
-          <div className={`container w-[250px] ${!hideUnhide ? '' : 'hidden'}  bg-white p-4 shadow-md rounded-b-md right-0 top-16 md:top-14 border  mx-auto  absolute`} >
+          <div className={`container w-[250px] ${!hideUnhide ? '' : 'hidden'}  bg-white p-4 shadow-md rounded-b-md right-2 top-16 md:top-14 border  mx-auto  absolute`} >
             <div className="w-full ">
               <h2 className="text-2xl font-semibold mb-4">User Profile</h2>
               <div className="flex mb-4">
@@ -106,18 +111,26 @@ const Navbar: FC<NavbarProps> = () => {
                 <p id="mobile" className=" text-sm font-semibold text-gray-900 ml-2">{userData?.mobile}</p>
               </div>
               {
-                userData?.role !=='director' &&<>
-                
-              <div className="flex mb-4">
-                <label htmlFor="school" className="block text-base font-semibold  text-gray-900">School: </label>
-                <p id="school" className=" text-sm font-semibold text-gray-900 ml-2">{schoolName}</p>
-              </div>
+                userData?.role !== 'director' && <>
+
+                  <div className="flex mb-4">
+                    <label htmlFor="school" className="block text-base font-semibold  text-gray-900">School: </label>
+                    <p id="school" className=" text-sm font-semibold text-gray-900 ml-2">{schoolName}</p>
+                  </div>
                 </>
               }
               <div className="flex mb-4">
                 <label htmlFor="role" className="block text-base font-semibold  text-gray-900">Role: </label>
                 <p id="role" className=" text-sm font-semibold text-gray-900 ml-2">{userData?.role}</p>
               </div>
+              {
+                userData?.role !== 'principal'&& <>
+                  <div className="flex mb-4">
+                    <label htmlFor="role" className="block text-base font-semibold  text-gray-900">Class: </label>
+                    <p id="role" className=" text-sm font-semibold text-gray-900 ml-2">{classs}</p>
+                  </div>
+                </>
+              }
               <button onClick={handleSignOut} className="flex w-full text-base font-semibold text-black border-t pt-4 hover:text-blue-700">
                 <CiLogout size={20} />
                 <span className='ml-4 pb-1'> Sign Out</span>

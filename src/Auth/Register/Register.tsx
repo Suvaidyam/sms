@@ -2,31 +2,27 @@ import React, { FC, useEffect } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import Http from '../../Services/Http';
-import { Link } from 'react-router-dom';
 import { useDataContext } from '../../Context/DataContext';
 interface RegisterProps { }
 
 const Register: FC<RegisterProps> = () => {
-  const {roleType, SchoolName, setSchoolName } = useDataContext()
+  const { roleType, SchoolName, setSchoolName } = useDataContext()
+  console.log(roleType);
+  
   useEffect(() => {
-    const fechData = async () => { 
-      try { 
+    const fechData = async () => {
+      try {
         let res: any = await Http({
           url: '/school/getallschool',
           method: 'get',
         });
-        // console.log(res.data.schools);
         setSchoolName(res.data.schools)
       } catch (error) {
         console.error(error);
-
       }
     }
     fechData()
-
-  }, [])
-
-
+  }, [setSchoolName])
 
   const validationSchema = Yup.object({
     email: Yup.string().required('School Name is required'),
@@ -40,26 +36,23 @@ const Register: FC<RegisterProps> = () => {
       .required('Confirm password is required'),
     username: Yup.string().required('Founding Year is required'),
     mobile: Yup.number().required('Address is required'),
-    
+    userClass:Yup.number().required('Class is required'),
+
   });
 
-
-
-  const handleSubmit = async (values: any,{resetForm}:any) => {
+  const handleSubmit = async (values: any, { resetForm }: any) => {
     const email = values.email;
     const password = values.password;
     const username = values.username;
     const mobile = values.mobile;
     const role = roleType;
     const school = values.school;
-// const data = {email,password,username ,mobile ,role ,school}
-// console.log(data);
-
+    const userClass = values.userClass;
     try {
       let res = await Http({
-        url:'/auth/createuser',
-        method:'post',
-        data:{email,password,username ,mobile ,role ,school},
+        url: '/auth/createuser',
+        method: 'post',
+        data: { email, password, username, mobile, role, school ,userClass},
       });
       console.log(res);
       resetForm()
@@ -79,7 +72,6 @@ const Register: FC<RegisterProps> = () => {
               username: '',
               mobile: '',
               school: '',
-
             }}
             validationSchema={validationSchema}
             onSubmit={handleSubmit}
@@ -93,7 +85,6 @@ const Register: FC<RegisterProps> = () => {
                   id="email"
                   className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                   placeholder=" "
-
                 />
                 <label
                   htmlFor="email"
@@ -112,7 +103,6 @@ const Register: FC<RegisterProps> = () => {
                   id="password"
                   className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                   placeholder=" "
-
                 />
                 <label
                   htmlFor="password"
@@ -163,7 +153,6 @@ const Register: FC<RegisterProps> = () => {
                   </p>
                 </div>
                 <div className="relative z-0 w-full mb-5 group">
-
                   <Field
                     // type='select'
                     as='select'
@@ -199,7 +188,7 @@ const Register: FC<RegisterProps> = () => {
                     id="mobile"
                     className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                     placeholder=" "
-                    
+
 
                   />
                   <label
@@ -212,7 +201,40 @@ const Register: FC<RegisterProps> = () => {
                     <ErrorMessage name='mobile' />
                   </p>
                 </div>
+                <div className="relative z-0 w-full mb-5 group">
+                  <Field
+                    as='select'
+                    min='10'
+                    pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                    name="userClass"
+                    id="userClass1"
+                    className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                    placeholder=" "
 
+
+                  >
+                    <option value="" disabled>Select School</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                  </Field>
+                  <label
+                    htmlFor="userClass1"
+                    className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+                  >
+                   Class
+                  </label>
+                  <p className='text-red-600 text-xs ml-2 pt-1'>
+                    <ErrorMessage name='userClass' />
+                  </p>
+                </div>
                 
               </div>
               <button

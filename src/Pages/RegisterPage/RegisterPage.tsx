@@ -4,6 +4,8 @@ import TeacherCard from './Teacher/TeacherCard';
 import StudentCard from './Student/StudentCard';
 import { Link, Outlet } from 'react-router-dom';
 import { useDataContext } from '../../Context/DataContext';
+import YourSchools from '../YourSchools/yourschools';
+import StRegister1 from './StRegister/StRegister';
 
 interface RegisterPageProps { }
 
@@ -33,10 +35,13 @@ const RegisterPage: FC<RegisterPageProps> = () => {
                             <Link to={'register'} onClick={registerHandler}>
                                 <TeacherCard />
                             </Link>
-                            
+
                             <Link to={'register'} onClick={registerHandler} className={``}>
                                 <StudentCard />
                             </Link>
+                            {/* <Link to={'StRegister'} onClick={registerHandler}>
+                                <StRegister1 />
+                            </Link> */}
                         </>
                     }
                     {storedUser?.role === 'principal' &&
@@ -47,6 +52,7 @@ const RegisterPage: FC<RegisterPageProps> = () => {
                             <Link to={'register'} onClick={registerHandler} className={``}>
                                 <StudentCard />
                             </Link>
+                            
                         </>
                     }
                     {storedUser?.role === 'teacher' &&
@@ -54,11 +60,16 @@ const RegisterPage: FC<RegisterPageProps> = () => {
                             <StudentCard />
                         </Link>
                     }
-                    
+
                 </div>
-                <div className={`w-[90%] ${block} mx-auto`}>
-                    <Outlet />
-                </div>
+
+            </div>
+            <div className={`w-[90%] ${block} mx-auto`}>
+                {/* wuefwfguiwgfwuifguiwfuiweuifguiwegfuigewifugweuigfuigweifiuwgeufuweigfuigweuigfuiwegfuigweuigfuigewigfuiwegifgewigfiwegfiwegifgweigfiewgfgweifgi */}
+                <Outlet />
+            </div>
+            <div className={`${hide}`}>
+                <YourSchools />
             </div>
 
 

@@ -1,7 +1,7 @@
 import axios from "axios";
-const baseUrl = `${process.env.REACT_APP_API_BASE_URL}/api`;
-// const baseUrl = 'http://localhost:3000/api'
-console.log(baseUrl);
+// const baseUrl = `${process.env.REACT_APP_API_BASE_URL}/api`;
+const baseUrl = 'http://localhost:2000/api'
+// console.log(baseUrl);
 
 type optionsType = {
     url: string

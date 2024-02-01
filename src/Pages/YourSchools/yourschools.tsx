@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import { useDataContext } from '../../Context/DataContext';
 import YourSchooldemo from './yourschooldemo';
 import { FaSchool } from "react-icons/fa";
+import ImagePopup from './ImagePopup/ImagePopup';
+
 
 interface YourSchoolsProps { }
 
@@ -11,11 +13,14 @@ const YourSchools: FC<YourSchoolsProps> = () => {
   const navigate = useNavigate();
   const user: any = sessionStorage.getItem('user');
   const finalResult: any = JSON.parse(user);
-  console.log(finalResult);
+  const schoolid = finalResult.school?._id;
+  const schoolrole = finalResult.role;
 
+  
   const [allSchools, setallSchools] = useState<any[] | null>(null);
   const { OutletMyschool, setOutletMyschool } = useDataContext();
-  console.log(allSchools);
+  const [selectedSchool, setSelectedSchool] = useState<any | null>(null);
+  const [SchoolImage, setSchoolImage] = useState<any | boolean>(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -23,7 +28,7 @@ const YourSchools: FC<YourSchoolsProps> = () => {
         let res: any = await Http({
           url: '/school/getschool',
           method: 'get',
-          data: { school: finalResult.role === 'director' ? '' : finalResult.school },
+          data: { school: schoolrole === 'director'  ? schoolrole  : schoolid },
         });
         setallSchools(res.data.schools);
       } catch (error) {
@@ -33,90 +38,71 @@ const YourSchools: FC<YourSchoolsProps> = () => {
     fetchData();
   }, []);
 
-  const schoolHandler = (school: any) => () => {
-    setOutletMyschool('hidden');
-    navigate('/home/schoolpage/myschool');
-    console.log(school);
-    localStorage.setItem('school', JSON.stringify(school));
+  // const schoolHandler = (school: any) => () => {
+  //   setOutletMyschool('hidden');
+  //   navigate('/home/schoolpage/myschool');
+  //   console.log(school);
+  //   localStorage.setItem('school', JSON.stringify(school));
+  // };
+  const formatIndianDate = (dateString:any) => {
+    const dateObject = new Date(dateString);
+    const day = dateObject.getDate();
+    const month = dateObject.getMonth() + 1;
+    const year = dateObject.getFullYear();
+  
+    const formattedDay = day < 10 ? `0${day}` : day;
+    const formattedMonth = month < 10 ? `0${month}` : month;
+  
+    return `${formattedDay}-${formattedMonth}-${year}`;
+  };
+  
+   const onClosePopup = () => {
+    setSchoolImage((dev:any)=>!dev)
   };
 
   return (
     <>
-      <div className='w-full bg-white  m-4 rounded-sm border hidden md:block '>
-        {allSchools ? (
-          <table className="table-auto w-full ">
-            <thead className=''>
-              <tr className='border-b bg-blue-700 rounded-sm '>
-                <th className="px-4 py-2 text-base text-white font-semibold">School Logo</th>
-                <th className="px-4 py-2 text-base text-white font-semibold">School Name</th>
-                <th className="px-4 py-2 text-base text-white font-semibold">School Code</th>
-                <th className="px-4 py-2 text-base text-white font-semibold">Founding Year</th>
-                <th className="px-4 py-2 text-base text-white font-semibold">Address</th>
-              </tr>
-            </thead>
-            <tbody>
-              {allSchools.map((school, index) => (
-                <tr key={index} onClick={schoolHandler(school)} className="cursor-pointer hover:bg-[#f1f5f9] hover:rounded-md border-b">
-                  {
-                    school.logo ?
-                      <div className='text-blue-700 flex justify-center mt-2 w-8 h-8 hover:border rounded-full iconbg mx-auto mb-1  '>
-                        <img src={`http://localhost:3000/${school.logo}`} alt='school' className='w-full h-ful rounded-full' />
-                      </div> :
-                      <div className='text-blue-700 flex justify-center mt-2 w-8 h-8 pt-1 hover:border rounded-full iconbg mx-auto mb-1 '>
-                        <FaSchool size={20} />
-                      </div>
-                  }
-                  <td className=" px-4 py-2 my-2">{school.schoolname}</td>
-                  <td className=" px-4 py-2 my-2">{school.schoolcode}</td>
-                  <td className=" px-4 py-2 my-2">{school.foundingyear}</td>
-                  <td className=" px-4 py-2 my-2">{school.location}</td>
-                </tr>
-              ))}
-            </tbody>
-
-          </table>
-
-
-        ) : (
-          <YourSchooldemo />
-        )}
-       
-
+      <div className="grid grid-cols-1 gap-4">
+  {allSchools ? (
+    allSchools.map((school, index) => (
+      <div key={index} className="bg-white p-4 rounded-sm border hover:shadow-lg">
+        <div className="flex items-center justify-between mb-4">
+          <div className="text-blue-700">
+            {school.logo ? (
+              <img
+                onClick={() => {
+                  onClosePopup();
+                  setSelectedSchool(school.logo);
+                }}
+                src={`http://localhost:3000/${school.logo}`}
+                alt="school"
+                className="w-8 h-8 rounded-full cursor-pointer"
+              />
+            ) : (
+              <FaSchool size={20} />
+            )}
+          </div>
+          <div className="text-right text-xs text-gray-500">
+            Founding Year: {formatIndianDate(school.foundingyear)}
+          </div>
+        </div>
+        <div className="mb-2 font-semibold">{school.schoolname}</div>
+        <div className="text-gray-600 mb-2">School Code: {school.schoolcode}</div>
+        <div className="text-gray-600 mb-2">Address: {school.location}</div>
+        {/* Add more details if needed */}
       </div>
-      <div className='w-full md:hidden bg-white shadow-md p-4 rounded-sm border'>
-        {
-          allSchools?.map((school, index) => (
+    ))
+  ) : (
+    <YourSchooldemo />
+  )}
+</div>
 
-            <tr key={index} className='flex border  mb-2'>
-              <div className='w-[30%] bg-blue-700'>
-                <th className="px-4 block py-2 text-base text-white font-semibold h-14">School Logo</th>
-                <th className="px-4 block py-2 text-base text-white font-semibold h-14">School Name</th>
-                <th className="px-4 block py-2 text-base text-white font-semibold h-14">School Code</th>
-                <th className="px-4 block py-2 text-base text-white font-semibold h-14">Founding Year</th>
-                <th className="px-4 block py-2 text-base text-white font-semibold h-18">Address</th>
-              </div>
-              <div className='w-[70%] pt-3'>
-                <td className=' block h-10 '>
-                  {
-                    school.logo ?
-                      <div className='text-blue-700 flex justify-center mt-2 w-8 h-8  hover:border rounded-full iconbg mx-auto mb-1  '>
-                        <img src={`http://localhost:3000/${school.logo}`} alt='school' className='w-full h-ful rounded-full' />
-                      </div> :
-                      <div className='text-blue-700 flex justify-center mt-2 w-8 h-8 pt-1 hover:border rounded-full iconbg mx-auto mb-1 '>
-                        <FaSchool size={20} />
-                      </div>
-                  }
-                </td>
-                <td className="block px-4 py-2 h-14">{school.schoolname}</td>
-                <td className="block px-4 py-2 h-14">{school.schoolcode}</td>
-                <td className="block px-4 py-2 h-14">{school.foundingyear}</td>
-                <td className="block px-4 py-2 h-18">{school.location}</td>
-              </div>
-            </tr>
-          ))
-        }
-
-      </div>
+      {SchoolImage && (
+        <ImagePopup
+          imageUrl={`http://localhost:3000/${selectedSchool}`}
+          onClose={onClosePopup}
+        />
+      )}
     </>
   );
 };

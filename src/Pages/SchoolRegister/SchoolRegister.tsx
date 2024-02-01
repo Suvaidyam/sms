@@ -2,7 +2,7 @@ import React, { FC, useState, useEffect } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import Http from '../../Services/Http';
-
+ 
 interface SchoolRegisterProps { }
 
 const validationSchema = Yup.object({
@@ -14,6 +14,7 @@ const validationSchema = Yup.object({
 
 const SchoolRegister: FC<SchoolRegisterProps> = () => {
   const [image, setImage] = useState<File | null>(null)
+  
   const [imagePreview, setImagePreview] = useState<string | null>(null);
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -24,6 +25,8 @@ const SchoolRegister: FC<SchoolRegisterProps> = () => {
   };
 
   const handleSubmit = async (values: any, { setSubmitting, resetForm }: any) => {
+    console.log(values);
+    
     try {
       const formData = new FormData();
       formData.append('schoolname', values.schoolname);

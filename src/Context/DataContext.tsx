@@ -26,7 +26,16 @@ interface DataContextType {
   setisMobileSidebarOpen: (newData: boolean | ((prev: boolean) => boolean)) => void;
   hideUnhide:boolean;
   sethideUnhide: (newData: boolean | ((prev: boolean) => boolean)) => void;
-
+  TaskCardHide:boolean;
+  setTaskCardHide:(newData: boolean) => void;
+  TaskCardHideT: boolean;
+  setTaskCardHideT:(newData: boolean) => void;
+  StudentProfile:boolean;
+  setStudentProfile:(newData: boolean) => void;
+  StudentUpdate:boolean;
+  setStudentUpdate:(newData: boolean) => void;
+  selectedValue:number;
+  setSelectedValue:(newData: number) => void;
 }
 
 const DataContext = createContext<DataContextType | undefined>(undefined);
@@ -45,11 +54,18 @@ export const DataProvider: React.FC<DataProviderProps> = ({ children }) => {
   const [massegeLogout, setmassegeLogout] = useState<boolean>(false);
   const [isMobileSidebarOpen, setisMobileSidebarOpen] = useState<boolean>(true);
   const [hideUnhide, sethideUnhide] = useState<boolean>(true);
+  const [TaskCardHide, setTaskCardHide] = useState<boolean>(false);
+  const [TaskCardHideT, setTaskCardHideT] = useState<boolean>(false);
+  const [StudentProfile, setStudentProfile] = useState<boolean>(false);
+  const [StudentUpdate, setStudentUpdate] = useState<boolean>(false);
+  const [selectedValue, setSelectedValue] = useState<number>(1);
+
   return (
     <DataContext.Provider value={{ hide, sethide , SchoolName, setSchoolName ,roleType,
      setroleType,OutletMyschool, setOutletMyschool ,userData,setuserData,loginMassage, 
      setloginMassage,massegeLogout, setmassegeLogout ,isMobileSidebarOpen, setisMobileSidebarOpen
-     ,hideUnhide, sethideUnhide
+     ,hideUnhide, sethideUnhide ,TaskCardHide, setTaskCardHide ,TaskCardHideT, setTaskCardHideT ,StudentProfile, setStudentProfile,
+     StudentUpdate, setStudentUpdate,selectedValue, setSelectedValue
      }}>
       {children}
     </DataContext.Provider>
