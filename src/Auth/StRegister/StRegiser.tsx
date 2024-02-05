@@ -218,6 +218,7 @@ const StRegister: FC<StRegisterProps> = ({ studentuserid }) => {
                                         </option>
                                         <option value="male">Male</option>
                                         <option value="female">Female</option>
+                                        <option value="thirdgender">Third gender</option>
                                     </Field>
                                     <label
                                         htmlFor="gender"

@@ -16,12 +16,18 @@ const Navbar: FC<NavbarProps> = () => {
   const navigate = useNavigate()
 
 
-
-  const profileHandler = () => {
-    sethideUnhide((rev) => !rev)
+  useEffect(() => {
     const storedUserString = sessionStorage.getItem("user");
     const storedUser = storedUserString ? JSON.parse(storedUserString) : null;
     setuserData(storedUser)
+    console.log(userData);
+
+  }, [])
+
+
+  const profileHandler = () => {
+    sethideUnhide((rev) => !rev)
+
   };
 
   const schoolName = userData?.school?.schoolname;
@@ -43,7 +49,7 @@ const Navbar: FC<NavbarProps> = () => {
           data: { id: userData?.id }
         });
         console.log(res.data);
-        
+
       } catch (error) {
         console.log(error);
       }
@@ -74,11 +80,15 @@ const Navbar: FC<NavbarProps> = () => {
                 <span className="self-center absolute  text-gray-900 uppercase sm:text-2xl whitespace-nowrap text-base font-semibold">
                   SCHOOL SMS
                 </span>
+                
               </div>
+              
             </div>
             <div className="flex w-2/4 justify-end ">
+           
               <div className="flex   ">
-                <div className=' '>
+                <div className=' flex '>
+                <div className='mr-0 w-[130px] capitalize text-base pt-1 font-semibold'>{userData?.username}</div>
                   <button
                     onClick={profileHandler}
                     type="button"
@@ -124,7 +134,7 @@ const Navbar: FC<NavbarProps> = () => {
                 <p id="role" className=" text-sm font-semibold text-gray-900 ml-2">{userData?.role}</p>
               </div>
               {
-                userData?.role !== 'principal'&& <>
+                userData?.role !== 'principal' && <>
                   <div className="flex mb-4">
                     <label htmlFor="role" className="block text-base font-semibold  text-gray-900">Class: </label>
                     <p id="role" className=" text-sm font-semibold text-gray-900 ml-2">{classs}</p>

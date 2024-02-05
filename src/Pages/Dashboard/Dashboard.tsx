@@ -7,6 +7,8 @@ import TeacherCard from "./TeacherCard/TeacherCard";
 import StudentCard from "./StudentCard/StudentCard";
 import PieCharts from "../../Charts/PieCharts";
 import SuperAdmin from "./SuperAdmin/SuperAdmin";
+import BarChart from "../../Charts/BarChart";
+import MyCalendar from "../../Components/MyCalendar";
 
 interface DashboardProps { }
 
@@ -47,10 +49,14 @@ const Dashboard: FC<DashboardProps> = () => {
                             </>
                         )}
                     </div>
-                    <div className="mt-5 ">{/* <Student/> */}</div>
+                    <div className="mt-5 bg-white border rounded-md"><BarChart/></div>
                 </div>
-                <div className="w-full md:w-[30%] bg-white border rounded-md h-screen">
-                    <PieCharts />
+                <div className="w-full md:w-[30%] h-full bg-white border rounded-md pb-5">
+                    <MyCalendar/>
+                    <div className="h-full">
+                        <PieCharts />
+                    </div>
+                    
                 </div>
             </div>
         </>

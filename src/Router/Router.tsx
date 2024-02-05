@@ -26,6 +26,7 @@ import ScienceStudent from '../Pages/Task/StudentSide/subject/ScienceStudent';
 import SocialScienceStudent from '../Pages/Task/StudentSide/subject/SocialScienceStudent';
 import StRegister from '../Auth/StRegister/StRegiser';
 import Dashboard from '../Pages/Dashboard/Dashboard';
+import Navbar from '../Pages/home/Navbar';
 interface RouterProps { }
 
 const Router: FC<RouterProps> = () => {
@@ -33,6 +34,7 @@ const Router: FC<RouterProps> = () => {
         <>
 
             <Routes>
+                <Route path='/' element={<Navbar />} />
                 <Route path='/' element={<Login />} />
 
                 <Route path='/home' element={<Protected Component={Home} />}>
