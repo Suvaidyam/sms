@@ -1,15 +1,16 @@
 import type { FC } from 'react';
+import { Link } from 'react-router-dom';
 
 interface NavbarProps { }
 
 const Navbar: FC<NavbarProps> = () => {
     return (
         <>
-            <>
+            <div className='fixed z-50 w-full'>
                 <div
-                    className="logo text-center color-gray-700 font-sans text-base font-normal leading-normal tracking-normal box-border"
+                    className="logo  text-center color-gray-700 font-sans text-base font-normal leading-normal tracking-normal box-border"
                     style={{ backgroundColor: "#fff" }}
-                >
+                    >
                     <a
                         href="https://www.scindia.edu/"
                         className="box-border text-blue-500 no-underline border-none outline-none"
@@ -24,15 +25,14 @@ const Navbar: FC<NavbarProps> = () => {
                 <div
                     className="eportal font-normal font-serif text-right text-xs mt-[-45px] color-gray-700 bg-white box-border"
                     style={{ margin: "-45px 0px 0px" }}
-                >
-                    <a
-                        href="https://quickschool.niitnguru.com/Scindia"
-                        target="_blank"
-                        title="For Staff, Students & Parent"
-                        className="box-border text-gray-700 no-underline border-none outline-none inline-block mr-5 relative z-10"
                     >
-                        E-PORTAL
-                    </a>
+                    <Link
+                        to={'/login'}
+                        title="For Staff, Students & Parent"
+                        className="box-border text-base text-gray-700 no-underline border-none outline-none inline-block mr-5 relative z-10"
+                    >
+                        Login
+                    </Link>
                     <span>&nbsp;</span>|<span>&nbsp;</span>
                     <a
                         href="https://events.scindia.edu/"
@@ -85,8 +85,28 @@ const Navbar: FC<NavbarProps> = () => {
                             </form>
                         </div>
                     </div>
-                </div>
-            </>
+                </div> 
+                <nav className="bg-navy-blue px-4 py-3 bg-[#28384c] mt-5 ">
+                    <div className="container mx-auto flex justify-between items-center">
+                  
+                        <ul className="flex space-x-4">
+                            <li>
+                                <Link to="/" className="text-white hover:text-gray-300">Home</Link>
+                            </li>
+                            <li>
+                                <Link to="/about" className="text-white hover:text-gray-300">About</Link>
+                            </li>
+                            <li>
+                                <Link to="/services" className="text-white hover:text-gray-300">Services</Link>
+                            </li>
+                            <li>
+                                <Link to="/contact" className="text-white hover:text-gray-300">Contact</Link>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+
+            </div>
 
         </>
     );
