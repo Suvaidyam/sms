@@ -28,6 +28,7 @@ import StRegister from '../Auth/StRegister/StRegiser';
 import Dashboard from '../Pages/Dashboard/Dashboard';
 import Navbar from '../Pages/home/Navbar';
 import RouterHome from '../Pages/home/RouterHome';
+import ImageSlider from '../Pages/HomeDashboard/ImageSlider';
 interface RouterProps { }
 
 const Router: FC<RouterProps> = () => {
@@ -42,6 +43,7 @@ const Router: FC<RouterProps> = () => {
 
                     {/* <Route path='superdashboard' element={<SuperAdmin />} /> */}
                     <Route path='dashboard' element={<Dashboard />} />
+                    <Route path='imageslider' element={<ImageSlider />} />
                     <Route path='student' element={<Student />} />
                     <Route path='teacher' element={<Teacher />} />
 

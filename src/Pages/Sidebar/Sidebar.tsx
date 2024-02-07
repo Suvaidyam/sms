@@ -9,6 +9,7 @@ import { FaUserTie } from 'react-icons/fa';
 import { BiTask } from "react-icons/bi";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import { MdKeyboardArrowUp } from "react-icons/md";
+import { FaImage } from "react-icons/fa";
 
 interface SidebarProps { }
 
@@ -82,6 +83,10 @@ const Sidebar: FC<SidebarProps> = () => {
                             <NavLink to={'dashboard'} className='flex text-base  font-semibold text-blue-700 mb-2  hover:bg-gray-200 px-4 py-2 rounded transition duration-300'>
                                 <MdSpaceDashboard size={20} />
                                 <span className='pl-2 text-base font-semibold text-gray-900 w-32  '>Dashboard</span>
+                            </NavLink>
+                            <NavLink to={'imageslider'} className='flex text-base  font-semibold text-blue-700 mb-2  hover:bg-gray-200 px-4 py-2 rounded transition duration-300'>
+                                <FaImage size={20} />
+                                <span className='pl-2 text-base font-semibold text-gray-900 w-32  '>ImageSlider</span>
                             </NavLink>
                             <NavLink to={'student'} className='flex text-base font-semibold text-blue-700 mb-2  hover:bg-gray-200 px-4 py-2 rounded transition duration-300'>
                                 <PiStudentBold size={20} />
