@@ -1,34 +1,54 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Slider from "react-slick";
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import Http from '../../../Services/Http';
 
 
 interface ImageSliderProps { }
 
 const ImageSlide: React.FC<ImageSliderProps> = () => {
-    let settings = {
-        dots: true,
-        infinite: true,
-        speed: 500,
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        autoplay: true, 
-        autoplaySpeed: 2000, 
-      };
+  const [imageData, setimageData] = useState([]);
+  // console.log(imageData);
+
+  useEffect(() => {
+    const fatchData = async () => {
+      try {
+        let res = await Http({
+          url: `/image/getimage`,
+          method: "get",
+          data: {}
+        });
+        setimageData(res?.data?.image)
+      } catch (error) {
+
+      }
+    }
+    fatchData()
+  }, [])
+
+
+  let settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 2000,
+  };
   return (
     <div className=''>
-     <Slider {...settings}>
-      <div className='w-full h-[700px]'>
-        <img className='w-full h-full ' src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/220px-Image_created_with_a_mobile_phone.png" alt="Image 1" />
-      </div>
-      <div className='w-full h-[700px]'>
-        <img className='w-full h-full ' src="https://deep-image.ai/blog/content/images/size/w1000/2022/09/underwater-magic-world-8tyxt9yz.jpeg" alt="Image 2" />
-      </div>
-      <div className='w-full h-[700px]'>
-        <img className='w-full h-full ' src="https://buffer.com/cdn-cgi/image/w=1000,fit=contain,q=90,f=auto/library/content/images/size/w600/2023/09/instagram-image-size.jpg" alt="Image 3" />
-      </div>
-    </Slider>
+      <Slider {...settings}>
+        {
+          imageData?.map((item: any, index: any) => (
+            <div className='w-full h-[700px]'>
+              <img className='w-full h-full ' src={`http://localhost:2000/${item?.image}`} alt="Image 1" />
+            </div>
+          ))
+        }
+
+      </Slider>
     </div>
   );
 };

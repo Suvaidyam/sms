@@ -11,7 +11,8 @@ const ImageSlider: FC<ImageSliderProps> = () => {
     const [Toggle, setToggle] = useState<boolean>(false)
     const [Image1, setImage1] = useState<string>('');
     const [imagePreview, setImagePreview] = useState<string | null>(null);
-
+    // console.log(Image1);
+    
     const initialImageForm = {
         title: "",
         description: ""
@@ -28,7 +29,7 @@ const ImageSlider: FC<ImageSliderProps> = () => {
         }
     };
     const SubmitEventHandler = async (values: any, resetForm: any) => {
-
+        
         try {
             const fromData = new FormData();
             fromData.append("title", values?.title);

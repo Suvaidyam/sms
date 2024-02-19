@@ -27,6 +27,8 @@ const StRegister: FC<StRegisterProps> = ({ studentuserid }) => {
     const UserID = userData[0]?._id;
     const [Image, setImage] = useState<File | null>(null);
 
+    console.log('STRegiser');
+    
 
     const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files[0]) {

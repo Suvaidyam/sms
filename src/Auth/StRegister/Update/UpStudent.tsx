@@ -22,7 +22,7 @@ const UpStudent: FC<UpStudentProps> = ({ studentuserid }) => {
     const [Image, setImage] = useState<File | null>(null);
     const [studentName, setStudentName] = useState<string>('');
     const [initialValues, setInitialValues] = useState<any>(null);
-console.log(studentuserid);
+    console.log('vk911');
 
     const [PastImage, setPastImage] = useState(null)
     useEffect(() => {
@@ -71,7 +71,7 @@ console.log(studentuserid);
     });
 
     const handleSubmit = async (value: any) => {
-        // console.log(value);
+        console.log("update",value);
 
         const formData = new FormData();
         formData.append("studetuserid",studentuserid);
