@@ -16,7 +16,7 @@ const Footer: FC<FooterProps> = () => {
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
         <div>
           <div className="flex justify-center text-teal-500 sm:justify-start">
-            <h1 className='text-2xl font-extrabold'>R N Public School  </h1>
+            <h1 className='text-2xl font-extrabold'>Demo School  </h1>
           </div>
           <p className="mt-6 max-w-md text-center leading-relaxed text-gray-200 sm:max-w-xs sm:text-left">
             Lorem ipsum dolor, sit amet consectetur adipisicing elit. Incidunt
@@ -269,7 +269,7 @@ const Footer: FC<FooterProps> = () => {
                       d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
                     />
                   </svg>
-                  <span className="flex-1 text-gray-200 ">john@doe.com</span>
+                  <span className="flex-1 text-gray-200 ">demo@expmle.com</span>
                 </a>
               </li>
               <li>
@@ -291,7 +291,7 @@ const Footer: FC<FooterProps> = () => {
                       d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
                     />
                   </svg>
-                  <span className="flex-1 text-gray-200 ">0123456789</span>
+                  <span className="flex-1 text-gray-200 ">+91 0123456789</span>
                 </a>
               </li>
               <li className="flex items-start justify-center gap-1.5 ltr:sm:justify-start rtl:sm:justify-end">
@@ -315,7 +315,7 @@ const Footer: FC<FooterProps> = () => {
                   />
                 </svg>
                 <address className="-mt-0.5 flex-1 not-italic text-gray-200 ">
-                  213 Lane, London, United Kingdom
+                  841301 Saran, Bihar, India
                 </address>
               </li>
             </ul>
@@ -341,7 +341,7 @@ const Footer: FC<FooterProps> = () => {
             </a>
           </p>
           <p className="mt-4 text-sm text-gray-200 sm:order-first sm:mt-0">
-            © 2024 R N Public School
+            © 2024 Demo School
           </p>
         </div>
       </div>

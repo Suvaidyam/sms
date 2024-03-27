@@ -13,7 +13,9 @@ const validationSchema = Yup.object({
 });
 
 const SchoolRegister: FC<SchoolRegisterProps> = () => {
-  const [image, setImage] = useState<File | null>(null)
+  const [image, setImage] = useState<File | null>(null);
+  console.log(image);
+  
   
   const [imagePreview, setImagePreview] = useState<string | null>(null);
 

@@ -6,21 +6,25 @@ import AdmissionEnquiry from './AdmissionEnquiry/AdmissionEnquiry';
 import AdmissionOpen from './AdmissionOpen/AdmissionOpen';
 import SchoolCirculars from './SchoolCirculars/SchoolCirculars';
 
-interface HomeProps {}
+interface HomeProps { }
 
 const Home: FC<HomeProps> = () => {
     return (
-        <div className=''>
+        <div className='w-full overflow-hidden'>
 
             <Navbar />
-            <ImageSlide />
-            <div className='grid grid-cols-1 md:grid-cols-3 gap-4 mx-4 md:mx-20 my-10'>
-                <AdmissionEnquiry/>
-                <AdmissionOpen/>
-                <SchoolCirculars/>
+            <div className='w-full '>
+                <ImageSlide />
             </div>
-            <About/>
-            
+            <div className='w-[90%] sm:w-[80%] mx-auto'>
+            <div className='w-full grid grid-cols-1 md:grid-cols-3 gap-4 my-6'>
+                <AdmissionEnquiry />
+                <AdmissionOpen />
+                <SchoolCirculars />
+            </div>
+            <About />
+            </div>
+
         </div>
     );
 }
